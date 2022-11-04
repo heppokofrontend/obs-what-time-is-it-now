@@ -6,6 +6,8 @@ import {Label} from './Label';
 import {Checkbox} from './Checkbox';
 
 type Props = {
+  is24State: {is24:boolean, setIs24:React.Dispatch<boolean>}
+  shouldShowSecoundState: {shouldShowSecound:boolean, setShouldShowSecound:React.Dispatch<boolean>}
   children?: React.ReactNode,
 };
 
@@ -21,12 +23,17 @@ const saveDataSave = () => {
   localStorage.setItem('obs-time-css', JSON.stringify(saveData));
 };
 
-export function Controller(props: Props) {
+export function Controller({
+  is24State,
+  shouldShowSecoundState,
+  children
+}: Props) {
   const [bgColor, setBgColor] = useState(saveData.bgColor || '#ffffff');
   const [color, setColor] = useState(saveData.color || '#000000');
   const [weight, setWeight] = useState(saveData.weight || 'normal');
   const [fontFamily, setfontFamily] = useState(saveData.fontFamily || 'sans-serif');
   const [isTransparent, setIsTransparent] = useState(saveData.isTransparent ?? true);
+
   const { t } = useTranslation();
   // console.log(isTransparent, 0);
 
@@ -98,14 +105,40 @@ main {
   align-self: auto;
   width: auto;
 }
-#target {
+.TIMER {
   margin: 0;
   border: 0;
   background: transparent;
 }
-#target__inner {
+.TIMER__inner {
   padding: 0;
 }
+#timer .TIMER-WRAP {
+  display: none;
+}
+${is24 && shouldShowSecound ? `
+#timer .TIMER-WRAP.Show24.ShowSec {
+  display: block;
+}
+` : ''}
+${!is24 && shouldShowSecound ? `
+#timer .TIMER-WRAP.No24.ShowSec {
+  display: block;
+}
+` : ''}
+
+${!is24 && !shouldShowSecound ? `
+#timer .TIMER-WRAP.No24.NoSec {
+  display: block;
+}
+` : ''}
+
+${is24 && !shouldShowSecound ? `
+#timer .TIMER-WRAP.Show24.NoSec {
+  display: block;
+}
+` : ''}
+
         `} readOnly/>
       </p>
     );
@@ -117,7 +150,7 @@ main {
     font-family: ${fontFamily};
   }
 
-  #target__inner {
+  #TIMER__inner {
     background: ${isTransparent ? 'transparent' : bgColor};
   }`;
 
@@ -125,9 +158,41 @@ main {
     document.head.append(styleElement)
   });
 
+  const {is24, setIs24} = is24State;
+  const {shouldShowSecound, setShouldShowSecound} = shouldShowSecoundState;
+
   return (
     <div id="controller" className={styles.wrap}>
-      {props.children}
+      {children}
+
+      <Fieldset legend={t('表示')}>
+        <Label name={t('24時間表記')}>
+          <Checkbox
+            checked={is24}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              const input = e.target;
+
+              saveData.is24 = input.checked;
+              saveDataSave();
+
+              return setIs24(input.checked);
+            }}
+          />
+        </Label>
+        <Label name={t('秒数')}>
+          <Checkbox
+            checked={shouldShowSecound}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              const input = e.target;
+
+              saveData.shouldShowSecound = input.checked;
+              saveDataSave();
+
+              return setShouldShowSecound(input.checked);
+            }}
+          />
+        </Label>
+      </Fieldset>
 
       <Fieldset legend={t('前景色')}>
         <Label name={t('文字色')}>
