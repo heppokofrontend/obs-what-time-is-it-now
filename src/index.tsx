@@ -18,7 +18,7 @@ const saveData: any = (() => {
 })();
 
 const Main = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [is24, setIs24] = useState(true);
   const [shouldShowSecound, setShouldShowSecound] = useState(saveData.shouldShowSecound ?? true);
 
@@ -71,7 +71,7 @@ const Main = () => {
         <ol>
           <li>{t('OBSでブラウザソースを追加（新規作成）')}</li>
           <li>{t('URL：このページのURLを設定')}</li>
-          <li>{t('幅：500程度')}</li>
+          <li>{t('幅：500～780程度')}</li>
           <li>{t('高さ：150程度')}</li>
           <li>{t('カスタムCSS：ページ下部のものを設定')}</li>
         </ol>
