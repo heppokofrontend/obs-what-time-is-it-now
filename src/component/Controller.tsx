@@ -139,7 +139,7 @@ ${is24 && !shouldShowSecound ? `#timer .TIMER-WRAP.Show24.NoSec {
     font-family: ${fontFamily};
   }
 
-  [data-id="TIMER__inner"] {
+  [data-id="target__inner"] {
     background: ${isTransparent ? 'transparent' : bgColor};
   }
 
