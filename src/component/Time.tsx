@@ -32,9 +32,9 @@ export function Time({
   }, [is24, shouldShowSecound]);
 
   return (
-    <div className={styles.wrap} id="target">
-      <div className={styles.inner} id="target__inner">
-        <p id="time" aria-live="polite" className={styles.time}>{text}</p>
+    <div className={styles.wrap} data-id="target">
+      <div className={styles.inner} data-id="target__inner">
+        <p data-id="time" aria-live="polite" className={styles.time}>{text}</p>
       </div>
     </div>
   );

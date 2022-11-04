@@ -77,6 +77,8 @@ export function Controller({
 
     return setBgColor(input.value);
   };
+  const {is24, setIs24} = is24State;
+  const {shouldShowSecound, setShouldShowSecound} = shouldShowSecoundState;
   const Css = function () {
     const onFocus = function (e: React.SyntheticEvent) {
       const textarea = e.target as HTMLTextAreaElement;
@@ -87,7 +89,7 @@ export function Controller({
     return (
       <p>
         <textarea aria-label={t('カスタムCSS')} onFocus={onFocus} className={styles.result} value={
-        `#time {
+        `[data-id="time"] {
   /* ${t('ここに時間の見た目のCSSを追記可能')} */
   color: ${color};
   font-weight: ${weight};
@@ -105,61 +107,71 @@ main {
   align-self: auto;
   width: auto;
 }
-.TIMER {
+[data-id="target"] {
   margin: 0;
   border: 0;
   background: transparent;
 }
-.TIMER__inner {
+[data-id="target__inner"] {
   padding: 0;
 }
 #timer .TIMER-WRAP {
-  display: none;
-}
-${is24 && shouldShowSecound ? `
-#timer .TIMER-WRAP.Show24.ShowSec {
-  display: block;
-}
-` : ''}
-${!is24 && shouldShowSecound ? `
-#timer .TIMER-WRAP.No24.ShowSec {
-  display: block;
-}
-` : ''}
-
-${!is24 && !shouldShowSecound ? `
-#timer .TIMER-WRAP.No24.NoSec {
-  display: block;
-}
-` : ''}
-
-${is24 && !shouldShowSecound ? `
-#timer .TIMER-WRAP.Show24.NoSec {
-  display: block;
-}
-` : ''}
-
-        `} readOnly/>
+  display: none!important;
+}${is24 && shouldShowSecound ? `#timer .TIMER-WRAP.Show24.ShowSec {
+  display: block!important;
+}` : ''}
+${!is24 && shouldShowSecound ? `#timer .TIMER-WRAP.No24.ShowSec {
+  display: block!important;
+}` : ''}
+${!is24 && !shouldShowSecound ? `#timer .TIMER-WRAP.No24.NoSec {
+  display: block!important;
+}` : ''}
+${is24 && !shouldShowSecound ? `#timer .TIMER-WRAP.Show24.NoSec {
+  display: block!important;
+}` : ''}`} readOnly/>
       </p>
     );
   };
 
-  styleElement.textContent = `#time {
+  styleElement.textContent = `[data-id="time"] {
     color: ${color};
     font-weight: ${weight};
     font-family: ${fontFamily};
   }
 
-  #TIMER__inner {
+  [data-id="TIMER__inner"] {
     background: ${isTransparent ? 'transparent' : bgColor};
-  }`;
+  }
+
+  #timer .TIMER-WRAP {
+    display: none;
+  }
+
+  ${is24 && shouldShowSecound ? `
+  #timer .TIMER-WRAP.Show24.ShowSec {
+    display: block;
+  }
+  ` : ''}
+  ${!is24 && shouldShowSecound ? `
+  #timer .TIMER-WRAP.No24.ShowSec {
+    display: block;
+  }
+  ` : ''}
+
+  ${!is24 && !shouldShowSecound ? `
+  #timer .TIMER-WRAP.No24.NoSec {
+    display: block;
+  }
+  ` : ''}
+
+  ${is24 && !shouldShowSecound ? `
+  #timer .TIMER-WRAP.Show24.NoSec {
+    display: block;
+  }` : ''}`;
 
   useEffect(() => {
     document.head.append(styleElement)
   });
-
-  const {is24, setIs24} = is24State;
-  const {shouldShowSecound, setShouldShowSecound} = shouldShowSecoundState;
 
   return (
     <div id="controller" className={styles.wrap}>

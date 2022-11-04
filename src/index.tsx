@@ -19,48 +19,36 @@ const saveData: any = (() => {
 
 const Main = () => {
   const { t } = useTranslation();
-  const [is24, setIs24] = useState(true);
+  const [is24, setIs24] = useState(saveData.is24 ?? true);
   const [shouldShowSecound, setShouldShowSecound] = useState(saveData.shouldShowSecound ?? true);
 
   return (
     <main>
       <div id="timer">
-        {
-          (is24 && shouldShowSecound) &&
-          <div className="TIMER-WRAP Show24 ShowSec">
-            <Time
-              is24={true}
-              shouldShowSecound={true}
-            />
-          </div>
-        }
-        {
-          (!is24 && !shouldShowSecound) &&
-          <div className="TIMER-WRAP No24 NoSec">
-            <Time
-              is24={false}
-              shouldShowSecound={false}
-            />
-          </div>
-        }
-        {
-          (is24 && !shouldShowSecound) &&
-          <div className="TIMER-WRAP Show24 NoSec">
-            <Time
-              is24={true}
-              shouldShowSecound={false}
-            />
-          </div>
-        }
-        {
-          (!is24 && shouldShowSecound) &&
-          <div className="TIMER-WRAP No24 NoSec">
-            <Time
-              is24={false}
-              shouldShowSecound={true}
-            />
-          </div>
-        }
+        <div className="TIMER-WRAP Show24 ShowSec">
+          <Time
+            is24={true}
+            shouldShowSecound={true}
+          />
+        </div>
+        <div className="TIMER-WRAP No24 NoSec">
+          <Time
+            is24={false}
+            shouldShowSecound={false}
+          />
+        </div>
+        <div className="TIMER-WRAP Show24 NoSec">
+          <Time
+            is24={true}
+            shouldShowSecound={false}
+          />
+        </div>
+        <div className="TIMER-WRAP No24 ShowSec">
+          <Time
+            is24={false}
+            shouldShowSecound={true}
+          />
+        </div>
       </div>
       <Controller
         is24State={{is24, setIs24}}
@@ -71,7 +59,7 @@ const Main = () => {
         <ol>
           <li>{t('OBSでブラウザソースを追加（新規作成）')}</li>
           <li>{t('URL：このページのURLを設定')}</li>
-          <li>{t('幅：500～780程度')}</li>
+          <li>{t('幅：500～900程度')}</li>
           <li>{t('高さ：150程度')}</li>
           <li>{t('カスタムCSS：ページ下部のものを設定')}</li>
         </ol>
