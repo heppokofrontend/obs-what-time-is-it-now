@@ -143,6 +143,12 @@ ${is24 && !shouldShowSecound ? `#timer .TIMER-WRAP.Show24.NoSec {
     background: ${isTransparent ? 'transparent' : bgColor};
   }
 
+  #time {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
   #timer .TIMER-WRAP {
     display: none;
   }
