@@ -1,6 +1,6 @@
 # OBSに現在時刻を表示するやつ
 
-⚠ 開発者の方へ。
+⚠ 開発者の方へ。  
 リポジトリは [heppokofrontend/heppokofrontend.dev](https://github.com/heppokofrontend/heppokofrontend.dev) に統合されました。
 
 ----
