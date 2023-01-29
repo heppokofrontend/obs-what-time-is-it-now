@@ -1,5 +1,10 @@
 # OBSに現在時刻を表示するやつ
 
+⚠ 開発者の方へ。
+リポジトリは [heppokofrontend/heppokofrontend.dev](https://github.com/heppokofrontend/heppokofrontend.dev) に統合されました。
+
+----
+
 Displays the current time.
 
 現在時刻を表示するだけのページです。
@@ -14,7 +19,7 @@ Displays the current time.
 2. 「現在時刻」などをソース名にする
 3. プロパティを設定する
     - 「URL」に「<https://heppokofrontend.dev/tools/obs/what-time-is-it-now>」を入力する
-    - 「幅」に「500」と入力する
+    - 「幅」に「600」と入力する
     - 「高さ」に「150」と入力する
     - 「カスタムCSS」に任意のCSSを記述する
 4. 「OK」を押す
