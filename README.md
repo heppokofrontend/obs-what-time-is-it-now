@@ -8,7 +8,7 @@ Displays the current time.
 
 ## OBSに乗せる方法
 
-![](./obs.png)
+![](https://user-images.githubusercontent.com/6637993/215340004-3b249447-70dc-4681-b0a2-6ee73047275e.png)
 
 1. OBSのソースに「ブラウザ」を追加する
 2. 「現在時刻」などをソース名にする
